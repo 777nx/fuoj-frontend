@@ -18,9 +18,17 @@
         />
       </a-form-item>
       <a-form-item>
-        <a-button type="primary" html-type="submit" style="width: 120px"
-          >登录
-        </a-button>
+        <div class="auth-submit-row">
+          <a-button type="primary" html-type="submit" style="width: 120px">
+            登录
+          </a-button>
+          <span class="auth-switch">
+            没有账号？
+            <router-link to="/user/register" class="auth-switch-link"
+              >去注册</router-link
+            >
+          </span>
+        </div>
       </a-form-item>
     </a-form>
   </div>
@@ -61,3 +69,35 @@ const handleSubmit = async () => {
   }
 };
 </script>
+
+<style scoped>
+.auth-submit-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 16px;
+}
+
+.auth-switch {
+  font-size: 14px;
+  color: var(--color-text-2);
+  white-space: nowrap;
+}
+
+.auth-switch-link {
+  color: rgb(var(--primary-6));
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-switch-link:hover {
+  color: rgb(var(--primary-5));
+}
+
+.auth-switch-link:focus-visible {
+  outline: 2px solid rgb(var(--primary-6));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+</style>
