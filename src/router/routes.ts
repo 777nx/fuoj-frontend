@@ -1,11 +1,13 @@
 import { RouteRecordRaw } from "vue-router";
-import HomeView from "@/views/HomeView.vue";
-import AdminView from "@/views/AdminView.vue";
 import NoAuthView from "@/views/NoAuthView.vue";
 import AccessEnum from "@/access/accessEnum";
 import UserLayout from "@/layouts/UserLayout.vue";
 import UserLoginView from "@/views/user/UserLoginView.vue";
 import UserRegisterView from "@/views/user/UserRegisterView.vue";
+import AddQuestionView from "@/views/question/AddQuestionView.vue";
+import ManageQuestionView from "@/views/question/ManageQuestionView.vue";
+import QuestionsView from "@/views/question/QuestionsView.vue";
+import ViewQuestionsView from "@/views/question/ViewQuestionsView.vue";
 
 export const routes: Array<RouteRecordRaw> = [
   {
@@ -29,17 +31,49 @@ export const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/",
+    path: "/questions",
     name: "浏览题目",
-    component: HomeView,
+    component: QuestionsView,
   },
   {
-    path: "/admin",
-    name: "管理员可见",
-    component: AdminView,
+    path: "/view/question/:id",
+    name: "在线做题",
+    component: ViewQuestionsView,
+    props: true,
+    meta: {
+      access: AccessEnum.USER,
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/add/question",
+    name: "创建题目",
+    component: AddQuestionView,
+    meta: {
+      access: AccessEnum.USER,
+    },
+  },
+  {
+    path: "/update/question",
+    name: "更新题目",
+    component: AddQuestionView,
+    meta: {
+      access: AccessEnum.USER,
+      hideInMenu: true,
+    },
+  },
+  {
+    path: "/manage/question",
+    name: "管理题目",
+    component: ManageQuestionView,
     meta: {
       access: AccessEnum.ADMIN,
     },
+  },
+  {
+    path: "/",
+    name: "主页",
+    component: QuestionsView,
   },
   {
     path: "/noAuth",
@@ -49,13 +83,21 @@ export const routes: Array<RouteRecordRaw> = [
       hideInMenu: true,
     },
   },
-  {
-    path: "/about",
-    name: "关于我的",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
-  },
+  // {
+  //   path: "/admin",
+  //   name: "管理员可见",
+  //   component: AdminView,
+  //   meta: {
+  //     access: AccessEnum.ADMIN,
+  //   },
+  // },
+  // {
+  //   path: "/about",
+  //   name: "关于我的",
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () =>
+  //     import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
+  // },
 ];
